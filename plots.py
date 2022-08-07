@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import funciones as gf
 import prompts as gp
 import conversion_dinero as gcd
+
 # import user_data as gud
 import input_manipulation as gim
 import numpy as np
@@ -60,12 +61,14 @@ def presentar_totales(diccionario, lista, delta_days, archivo_currency, valor_do
 def pie_gastos(dicc, lista):
     """
     Generates de pie chart with percentages of the categories
+    TODO: Sacar categorías con 0%, también poner opción de sacar el ingreso.
     """
-    # cat = [values.title() for values in dicc.values()][1:]  # omito first col que es el ingreso
+    totales_cat = [
+            values for values in gf.totales_de_categorias(dicc, lista).values()
+            ]
     cat = [
-        values.title() for values in dicc.values()
-    ]  # omito first col que es el ingreso
-    totales_cat = [values for values in gf.totales_de_categorias(dicc, lista).values()]
+        values.title() for values in dicc.values() if values.title()
+    ]  # Generates list with the names of the categories.
     plt.pie(
         totales_cat, labels=cat, autopct="%1.1f%%", wedgeprops={"edgecolor": "black"}
     )
@@ -116,10 +119,10 @@ def ahorro_vs_tiempo(lista):
     ax.xaxis.set_major_locator(plt.MaxNLocator(20))  # Aparecen 20 ticks
     plt.gcf().autofmt_xdate(rotation=60)  # Angulo para rotar los xticks
     # Grafico una linea comun para el ahorro diario
-    plt.plot_date(dates_col, ahorro_col, markersize=0,
-                  linestyle="solid", linewidth="3")
-    plt.fill_between(dates_col, ahorro_col, where=(ahorro_col > 0),
-        alpha=0.3, interpolate=True)  # Para la condición era necesario el array del numpy
+    plt.plot_date(dates_col, ahorro_col, markersize=0, linestyle="solid", linewidth="3")
+    plt.fill_between(
+        dates_col, ahorro_col, where=(ahorro_col > 0), alpha=0.3, interpolate=True
+    )  # Para la condición era necesario el array del numpy
     plt.fill_between(
         dates_col, ahorro_col, where=(ahorro_col < 0), alpha=0.3, interpolate=True
     )  # Para la condición era necesario el array del numpy
