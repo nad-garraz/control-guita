@@ -61,25 +61,14 @@ def presentar_totales(diccionario, lista, delta_days, archivo_currency, valor_do
 def pie_gastos(dicc, lista):
     """
     Generates de pie chart with percentages of the categories
-    TODO: Sacar categorías con 0%, también poner opción de sacar el ingreso.
     """
     totales_cat = []
     cat = []
-    # totales_cat = [
-    #         values for values in gf.totales_de_categorias(dicc, lista).values()
-    #         ]
-    # cat = [
-    #     values.title() for values in dicc.values() if values.title()
-    # ]  # Generates list with the names of the categories.
-
-    print(gf.totales_de_categorias(dicc, lista))
-    print(dicc)
-
+    # Populate lists with non-zero categories nor 'I', thus showing only outcome portions
     for item in gf.totales_de_categorias(dicc, lista).items():
         if (item[0] != 'I' and item[1] != 0): #  Saco al ingreso y a las categorías con valor nulo
             cat.append(dicc[item[0]])
             totales_cat.append(item[1])
-
     plt.pie(
         totales_cat, labels=cat, autopct="%1.1f%%", wedgeprops={"edgecolor": "black"}
     )
