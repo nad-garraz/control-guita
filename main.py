@@ -3,6 +3,7 @@ import funciones as gf
 import prompts as gp
 import user_data as gud
 import conversion_dinero as gcd
+import readline
 
 
 def main():
