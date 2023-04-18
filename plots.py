@@ -14,6 +14,7 @@ hoy = date.date.today()
 def presentar_totales(diccionario, lista, delta_days, archivo_currency, valor_dolar):
     gp.separador(1)
     totales = gf.totales_de_categorias(diccionario, lista)
+    print(totales)
     gasto = sum([values for key, values in totales.items() if key != "I"])
     gasto = round(gasto, 1)
     gasto_diario = round(gasto / delta_days, 1)
@@ -98,7 +99,8 @@ def ahorro_vs_tiempo(lista):
     for fecha in dates:
         for item_lista in lista:
             if fecha == item_lista[0]:
-                if item_lista[3] != "I":
+                # Si el primer char de la cuarta columna es ...
+                if item_lista[3][0] != "I":
                     ahorro_del_dia -= float(item_lista[1])
                 else:
                     ahorro_del_dia += float(item_lista[1])
@@ -111,8 +113,8 @@ def ahorro_vs_tiempo(lista):
     maximo = max([abs(item[1]) for item in ahorro_parcial])
     # maximo = np.amax(ahorro_col) # Busco máximo para normalizar
     # maximo_abs = np.where(ahorro_col == maximo) # Indice de máximo
-    # ahorro_col = ahorro_col # Ahorro total
-    ahorro_col = ahorro_col / maximo  # Normalizo
+    ahorro_col = ahorro_col  # Ahorro total
+    # ahorro_col = ahorro_col / maximo  # Normalizo
 
     # Tuneo los ticks
     ax = plt.axes()
