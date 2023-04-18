@@ -7,14 +7,12 @@ import conversion_dinero as gcd
 import input_manipulation as gim
 import numpy as np
 import datetime as date
-
 hoy = date.date.today()
 
 
 def presentar_totales(diccionario, lista, delta_days, archivo_currency, valor_dolar):
     gp.separador(1)
     totales = gf.totales_de_categorias(diccionario, lista)
-    print(totales)
     gasto = sum([values for key, values in totales.items() if key != "I"])
     gasto = round(gasto, 1)
     gasto_diario = round(gasto / delta_days, 1)
@@ -104,7 +102,9 @@ def ahorro_vs_tiempo(lista):
                     ahorro_del_dia -= float(item_lista[1])
                 else:
                     ahorro_del_dia += float(item_lista[1])
-        ahorro_parcial.append([fecha, ahorro_del_dia])
+    # esta línea está tocada para el formato de la fecha
+    # habría que buscar una forma más elegante de manipular las fechas
+        ahorro_parcial.append([date.date.fromisoformat(fecha).strftime("%d/%m/%y"), ahorro_del_dia])
 
     # Uso los numpy arrays, porque hace más fácil el ploteo para pintar bajo la curva.
     dates_col = np.array([item[0] for item in ahorro_parcial])
@@ -118,7 +118,8 @@ def ahorro_vs_tiempo(lista):
 
     # Tuneo los ticks
     ax = plt.axes()
-    ax.xaxis.set_major_locator(plt.MaxNLocator(20))  # Aparecen 20 ticks
+    ax.xaxis.set_major_locator(plt.MaxNLocator(21))  # Aparecen 21 xticks
+    ax.yaxis.set_major_locator(plt.MaxNLocator(15))  # Aparecen 15 yticks
     plt.gcf().autofmt_xdate(rotation=60)  # Angulo para rotar los xticks
     # Grafico una linea comun para el ahorro diario
     plt.plot_date(dates_col, ahorro_col, markersize=0, linestyle="solid", linewidth="3")
