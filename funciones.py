@@ -47,7 +47,7 @@ def agregar_dato_a_archivo(fecha, monto, categoria, archivo, valor_dolar):
 
 def mostrar_lista_de_entradas(lista):
     """
-    Para mostrar los datos en forma lejible separando los
+    Para mostrar los datos en forma legible separando los
     meses con unas rayitas
     """
     fecha_actual = lista[0][0][6]  # primer dígito del mes
