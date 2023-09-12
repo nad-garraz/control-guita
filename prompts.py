@@ -1,17 +1,16 @@
 import plots as gpl
 import funciones as gf
-
 # import input_manipulation as gim
 
 
 def separador(lineas=1, simbolo="="):
     """asteriscs for decoration"""
     linea_separadora = simbolo * 55
-    for linea in range(lineas):
+    for _ in range(lineas):
         print(f"{linea_separadora}")
 
 
-def intro_current_datos(archivo_de_datos, archivo_currency, categorias):
+def intro_current_datos(valor_dolar, archivo_de_datos, archivo_currency):
     separador(1)
     paises_dict = {
         "usa": "USA",
@@ -21,8 +20,7 @@ def intro_current_datos(archivo_de_datos, archivo_currency, categorias):
     }
     pais = archivo_de_datos.split("_")[1]
     print(f"Lugar: {paises_dict[pais]}")
-    print(f"Moneda: {archivo_currency}")
-
+    print(f"Moneda: {archivo_currency} (1{archivo_currency}={round(valor_dolar,4)}USD)--(1USD={1.0/valor_dolar}{archivo_currency})")
 
 def principal_menu():
     separador(1)

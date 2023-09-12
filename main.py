@@ -34,7 +34,7 @@ def main():
                 dolar_file, gcd.remote_server, archivo_currency
             )
             # Muestra información sobre el archivo de datos en uso
-            gp.intro_current_datos(archivo_de_datos, archivo_currency, categorias)
+            gp.intro_current_datos(valor_dolar, archivo_de_datos, archivo_currency)
             nuevo_archivo = False
 
         # Prompt to choose

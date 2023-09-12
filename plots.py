@@ -31,9 +31,9 @@ def presentar_totales(diccionario, lista, delta_days, archivo_currency, valor_do
             print(f"{value.title()}: {total_categoria:,} {archivo_currency}")
         gp.separador(1, "-")
         print(f"Total gastos: {gasto:.0f} USD -- Gasto diario: {gasto_diario:,} USD")
+    # Acá no es dolar la archivo_currency
     else:
-        print(
-            f"Balance: {balance:.2f} {archivo_currency} ({gcd.to_dolar(balance, valor_dolar)}) (1{archivo_currency}={valor_dolar}USD)"
+        print(f"Balance: {balance:.2f} {archivo_currency} ({gcd.to_dolar(balance, valor_dolar)}) "
         )
         balance_diario = balance / delta_days
         print(f"Balance promedio por día: {balance_diario:.0f}{archivo_currency}")
